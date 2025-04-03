@@ -1,1 +1,2 @@
-backend\venv\
+/backend/private.py
+/backend/venv/
