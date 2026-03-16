@@ -1,0 +1,24 @@
+<Container>
+    <Center>
+      <Tabs.Root variant={"subtle"} rounded={"l3"}>
+        <Tabs.List bg="bg.inverted" rounded="l3" p="1" >
+
+          <Tabs.Trigger asChild value="home">
+            <Link to="/home">Home</Link>
+          </Tabs.Trigger>
+
+          <Tabs.Trigger asChild value="create" >
+            <Link to="/create">Create Page</Link>
+          </Tabs.Trigger>
+
+          <Tabs.Trigger asChild value="settings">
+            <Link to="/settings">Settings</Link>
+          </Tabs.Trigger>
+        <Tabs.Indicator rounded="l2" bg="bg.muted"/>
+        </Tabs.List>
+      </Tabs.Root>
+    </Center>
+    <Button alignContent={"end"}>
+      <Icon as={Md3dRotation} boxSize={5} />
+    </Button>
+    </Container>
