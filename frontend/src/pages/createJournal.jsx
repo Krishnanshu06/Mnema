@@ -1,25 +1,40 @@
-import { Button, Container, Input, Stack, Text, Textarea } from "@chakra-ui/react";
+import {
+  Button,
+  Container,
+  Input,
+  Stack,
+  Text,
+  Textarea,
+} from "@chakra-ui/react";
 import React from "react";
 import { LuCircleArrowRight } from "react-icons/lu";
-// import TextEditor from "../components/textEditor";
+import { useJournalStore } from "../store/journals";
 
-const createJournal = () => {
-
+const CreateJournal = () => {
+  
   const [newJournal, setNewJournal] = React.useState({
     title: "",
     content: "",
     userId: "000",
   });
 
-  const handleJournalPost = () => {
-    // Logic to post the journal entry
-    console.log("Journal Posted:", newJournal);};
+  const { createJournal: CreateJournalApi } = useJournalStore();
+
+  const handleJournalPost = async () => {
+    const { success, message } = await CreateJournalApi(newJournal);
+    console.log("Success:", success);
+    console.log("Message", message);
+
+    setNewJournal({
+      title: "",
+      content: "",
+      userId: "000",
+    });
+  };
 
   return (
     <Container
       display={"flex"}
-      // justifyContent={"center"}
-      // alignItems={"center"}
       my={10}
       p={0}
       borderRadius={9}
@@ -50,10 +65,11 @@ const createJournal = () => {
           css={{ "--focus-color": "rgba(168, 243, 228, 0.42)" }}
           marginTop={10}
           mx={10}
-
           name="title"
           value={newJournal.title}
-          onChange={(e) => setNewJournal({ ...newJournal, title: e.target.value })}
+          onChange={(e) =>
+            setNewJournal({ ...newJournal, title: e.target.value })
+          }
         />
 
         <Textarea
@@ -68,30 +84,33 @@ const createJournal = () => {
           css={{ "--focus-color": "rgba(168, 243, 228, 0.42)" }}
           mx={10}
           marginTop={6}
-
           name="content"
           value={newJournal.content}
-          onChange={(e) => setNewJournal({ ...newJournal, content: e.target.value })}
+          onChange={(e) =>
+            setNewJournal({ ...newJournal, content: e.target.value })
+          }
         />
 
         <Button
           alignSelf={"center"}
           bgColor={"#a8f3e46b"}
           color={"#1b3634"}
-          _hover={{ bgColor: "#2b63576b", color: "#cffaf7", shadow : "0px 0px 10px 0px #84d3ce" }}
-          // shadow={"0px 0px 10px 0px #ffffff"}
-          // size="lg"
-          // fontSize={18}
+          _hover={{
+            bgColor: "#2b63576b",
+            color: "#cffaf7",
+            shadow: "0px 0px 10px 0px #84d3ce",
+          }}
           borderRadius={20}
-
           onClick={handleJournalPost}
-          >
-            <Text fontSize={18} fontWeight={"bold"}>Post</Text>
-            <LuCircleArrowRight />
+        >
+          <Text fontSize={18} fontWeight={"bold"}>
+            Post
+          </Text>
+          <LuCircleArrowRight />
         </Button>
       </Stack>
     </Container>
   );
 };
 
-export default createJournal;
+export default CreateJournal;

@@ -5,13 +5,13 @@ const router = express.Router();
 
 
 
-router.get('/', getJournal);  
+router.get('/getAll', getJournal);  
 
-router.post('/', createJournalEntry);
+router.post('/create', createJournalEntry);
 
-router.put('/:id', updateJournalEntry);
+router.put('/edit/:id', updateJournalEntry);
 
-router.delete('/:id', deleteJournalEntry);
+router.delete('/del/:id', deleteJournalEntry);
 
 
 

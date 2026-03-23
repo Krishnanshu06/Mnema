@@ -1,12 +1,10 @@
 import React from "react";
 import { Container, Button, Flex, Text, Link, HStack } from "@chakra-ui/react";
-// import { IoMoon } from "react-icons/io5";
-// import { BiSolidSun } from "react-icons/bi";
 const Navbar = () => {
   return (
     <Container
       maxW="container.xl"
-      minW={"100vw"}
+      minW={"100%"}
       px={0}
       margin={0}
       bgColor={"#121919"}
@@ -19,7 +17,7 @@ const Navbar = () => {
           </Text>
         </Link>
 
-        <HStack marginLeft={550}>
+        <HStack marginLeft="36vw">
           <Button
             colorPalette="teal"
             variant="solid"
