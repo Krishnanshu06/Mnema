@@ -27,6 +27,3 @@ app.listen(PORT, () => {
 });
 
 
-
-//keku.database.2006
-//mongodb+srv://krishnanshuagrawal:keku.database.2006@data.ttspewy.mongodb.net/?appName=data
