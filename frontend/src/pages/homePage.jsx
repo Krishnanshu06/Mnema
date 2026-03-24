@@ -5,30 +5,12 @@ import { Link } from "react-router-dom";
 import JournalCard from "../components/JournalCard";
 
 const HomePage = () => {
-  const [journals, setJournals] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
 
-  // const journals = useJournalStore((state) => state.journals);
-
-  const { fetchJournals } = useJournalStore();
-
-  const loadJournals = async () => {
-    setLoading(true);
-    const { success, journals: data } = await fetchJournals();
-    console.log(success);
-    console.log("data", data);
-
-    if (success) {
-      setJournals(data);
-      // console.log("journals",journals)
-    }
-
-    setLoading(false);
-  };
+  const { fetchJournals , journals } = useJournalStore();
 
   React.useEffect(() => {
-    loadJournals();
-  }, []);
+    fetchJournals();
+  }, [fetchJournals]);
 
   React.useEffect(() => {
     console.log("Journals Updated:", journals);
@@ -69,7 +51,7 @@ const HomePage = () => {
           ))}
         </SimpleGrid>
 
-        {!loading && journals.length === 0 && (
+        {journals.length === 0 && (
           <Text
             fontSize={"1.5rem"}
             fontWeight={"bold"}

@@ -44,8 +44,28 @@
 
             set((state) => ({ journals: state.journals.filter((journal) => journal._id !== jid)}))
             return {success: success , message : message}
-        }
+        },
 
+        updateJournal: async (pid, updatedJournal) => {
+            const res = await fetch(`http://localhost:3000/journal/edit/${pid}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(updatedJournal),
+            });
+            const data = await res.json();
+            if (!data.success) return { success: false, message: data.message };
+
+            // update the ui immediately, without needing a refresh
+            set((state) => ({
+                journals: state.journals.map((journal) => (journal._id === pid ? data.data : journal)),
+            }));
+
+            return { success: true, message: data.message };
+        },
+
+        
 
 
 

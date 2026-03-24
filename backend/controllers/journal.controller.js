@@ -40,8 +40,20 @@ export const createJournalEntry = async (req, res) => {
 };
 
 export const updateJournalEntry = async (req, res) => {
-  const MongoId = req.params.id;
-  /// to update any field
+	const { id } = req.params;
+
+	const journal = req.body;
+
+	if (!mongoose.Types.ObjectId.isValid(id)) {
+		return res.status(404).json({ success: false, message: "Invalid Journal Id" });
+	}
+
+	try {
+		const updatedJournal = await Journal.findByIdAndUpdate(id, journal, { new: true });
+		res.status(200).json({ success: true, data: updatedJournal });
+	} catch (error) {
+		res.status(500).json({ success: false, message: "Server Error" });
+	}
 };
 
 export const deleteJournalEntry = async (req, res) => {
@@ -55,3 +67,4 @@ export const deleteJournalEntry = async (req, res) => {
     console.error("Error deleting journal entry:", error);
   }
 };
+
